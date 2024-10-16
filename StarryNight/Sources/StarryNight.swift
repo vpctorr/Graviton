@@ -9,6 +9,8 @@
 import Foundation
 import SQLite
 
+typealias Expression = SQLite.Expression
+
 enum StarryNight {
     static let db = try! Connection(Bundle.module.path(forResource: "stars", ofType: "sqlite3")!)
 
