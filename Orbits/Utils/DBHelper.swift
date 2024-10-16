@@ -10,6 +10,8 @@ import SQLite
 import SpaceTime
 import MathUtil
 
+typealias Expression = SQLite.Expression
+
 private let celestialBody = Table("celestial_body")
 private let cbId = Expression<Int64>("naifId")
 private let cusName = Expression<String?>("customName")

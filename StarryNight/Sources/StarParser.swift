@@ -66,19 +66,19 @@ extension UIImage {
         }
         
         let rng = SeededGenerator(seed: 7)
-        var pixSamples: [UInt8] = []
+        var pixSamples: [UInt64] = []
         let numSamples = 1000
         for _ in 0..<numSamples {
             let y = rng.nextInt(upper: height)
             let x = rng.nextInt(upper: width)
             let dataIdx = pix2Pos(y: y, x: x, width: width, numChannels: numChannels)
             let dataVal = getAvgRGB(data: data, pos: dataIdx, numChannels: numChannels)
-            pixSamples.append(dataVal)
+            pixSamples.append(UInt64(dataVal))
         }
         pixSamples.sort()
-        let INIT_STAR_PIX_THRESH: UInt8 = pixSamples[numSamples/2] + 30
-        let STAR_PIX_DELTA: UInt8 = 20
-        
+        let INIT_STAR_PIX_THRESH: UInt64 = UInt64(pixSamples[numSamples/2] + 30)
+        let STAR_PIX_DELTA: UInt64 = 20
+
         let starLock = NSLock()
         let startTime = Date()
         // TODO: parallel?
@@ -246,11 +246,11 @@ func pix2Pos(y: Int, x: Int, width: Int, numChannels: Int) -> Int {
     return y * width * numChannels + x * numChannels
 }
 
-func getAvgRGB(data: UnsafePointer<UInt8>, pos: Int, numChannels: Int) -> UInt8 {
+func getAvgRGB(data: UnsafePointer<UInt8>, pos: Int, numChannels: Int) -> UInt64 {
     let d1 = UInt16(data[pos])
     let d2 = UInt16(data[pos + 1])
     let d3 = UInt16(data[pos + 2])
-    return UInt8((d1 + d2 + d3) / 3)
+    return UInt64((d1 + d2 + d3) / 3)
 }
 
 func convertToGrayscale(_ image: UIImage) -> UIImage? {
