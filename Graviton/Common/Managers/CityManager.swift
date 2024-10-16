@@ -10,6 +10,8 @@ import CoreLocation
 import SQLite
 import UIKit
 
+typealias Expression = SQLite.Expression
+
 private let conn = try! Connection(Bundle.main.path(forResource: "cities", ofType: "sqlite3")!)
 private let cities = Table("cities")
 
