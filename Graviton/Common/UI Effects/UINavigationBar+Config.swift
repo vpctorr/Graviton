@@ -17,6 +17,5 @@ extension UINavigationBar {
             navBar.shadowImage = UIImage()
         }
         applyStyle(UINavigationBar.appearance(whenContainedInInstancesOf: [ObserverNavigationController.self]))
-        applyStyle(UINavigationBar.appearance(whenContainedInInstancesOf: [SolarSystemNavigationController.self]))
     }
 }
